@@ -44,27 +44,6 @@ ATank* ATankAIController::GetPlayerTank() const
 	return Cast<ATank>(PlayerTank);
 }
 
-void ATankAIController::AimTowardsCrosshair()
-{
-	if (!GetControlledTank())
-	{
-		return;
-	}
 
-	FVector HitLocation;
-
-	if (GetSightRayHitLocation(HitLocation))
-	{
-		UE_LOG(LogTemp, Warning, TEXT("HitLocation: %s"), *HitLocation.ToString());
-	}
-
-}
-
-bool ATankAIController::GetSightRayHitLocation(FVector & OutHitLocation) const
-{
-	OutHitLocation = FVector(1.0);
-
-	return true;
-}
 
 
