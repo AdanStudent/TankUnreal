@@ -23,10 +23,7 @@ void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	//AimTowardsCrosshair();
-
-	UE_LOG(LogTemp, Warning, TEXT("Player controller ticking"));
-
+	AimTowardsCrosshair();
 }
 
 
@@ -54,6 +51,20 @@ void ATankAIController::AimTowardsCrosshair()
 		return;
 	}
 
+	FVector HitLocation;
 
+	if (GetSightRayHitLocation(HitLocation))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("HitLocation: %s"), *HitLocation.ToString());
+	}
 
 }
+
+bool ATankAIController::GetSightRayHitLocation(FVector & OutHitLocation) const
+{
+	OutHitLocation = FVector(1.0);
+
+	return true;
+}
+
+
