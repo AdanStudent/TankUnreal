@@ -3,6 +3,7 @@
 #include "TankAimingComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
+#include "TankBarrel.h"
 
 
 // Sets default values for this component's properties
@@ -16,7 +17,7 @@ UTankAimingComponent::UTankAimingComponent()
 }
 
 
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent * BarrelToSet)
+void UTankAimingComponent::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
 	Barrel = BarrelToSet;
 }
@@ -51,12 +52,24 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 
 	//calculate the OutLaunchVelocity
 	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity(this, OutLaunchVelocity, StartLocation, HitLocation, LaunchSpeed, ESuggestProjVelocityTraceOption::DoNotTrace);
+
 	if (bHaveAimSolution)
 	{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
-		auto TankName = GetOwner()->GetName();
-
-		UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s"), *TankName, *AimDirection.ToString());
+		MoveBarrelTowards(AimDirection);
 	}
+}
+
+void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
+{
+
+	auto BarrelRotation = Barrel->GetForwardVector().Rotation();
+	auto AimAsRotator = AimDirection.Rotation();
+
+	auto DeltaRotator = AimAsRotator - BarrelRotation;
+	//UE_LOG(LogTemp, Warning, TEXT("AimAsRotater: %s"), *AimAsRotator.ToString())
+
+		Barrel->Elevate(5);
+
 }
 
