@@ -14,6 +14,10 @@ class TANKPROJECT_API UTankTurret : public UStaticMeshComponent
 {
 	GENERATED_BODY()
 	
+
+public:
+	UFUNCTION(BlueprintCallable)
+	void RotateTurret();
 	
 	
 	

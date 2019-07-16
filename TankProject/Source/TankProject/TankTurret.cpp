@@ -2,6 +2,9 @@
 
 #include "TankTurret.h"
 
+void UTankTurret::RotateTurret() 
+{
 
+}
 
 
