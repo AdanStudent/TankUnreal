@@ -16,8 +16,13 @@ class TANKPROJECT_API UTankTurret : public UStaticMeshComponent
 	
 
 public:
-	UFUNCTION(BlueprintCallable)
-	void RotateTurret();
+	void RotateTurret(float RelativeSpeed);
+
+	UPROPERTY(EditAnywhere, Category = Setup)
+		float MaxDegreesPerSecond = 25;
+
+	UPROPERTY(EditAnywhere, Category = Setup)
+		float MaxElevationDegrees = 40;
 	
 	
 	
