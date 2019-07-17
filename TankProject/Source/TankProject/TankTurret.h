@@ -18,10 +18,10 @@ class TANKPROJECT_API UTankTurret : public UStaticMeshComponent
 public:
 	void RotateTurret(float RelativeSpeed);
 
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		float MaxDegreesPerSecond = 25;
 
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		float MaxElevationDegrees = 40;
 	
 	
