@@ -10,7 +10,7 @@ class UTankBarrel; //forward delcaration
 class UTankTurret;
 
 //Hold barrel's propperties and Elevate method
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class TANKPROJECT_API UTankAimingComponent : public UActorComponent
 {
 	GENERATED_BODY()
