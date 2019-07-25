@@ -21,8 +21,6 @@ private:
 
 	virtual void Tick(float DeltaTime) override;
 
-	ATank* GetControlledTank();
-	
 	void AimTowardsCrosshair();
 
 	UPROPERTY(EditDefaultsOnly)
@@ -40,5 +38,9 @@ private:
 
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
 
+protected:
+
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	ATank* GetControlledTank();
 
 };
