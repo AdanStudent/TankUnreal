@@ -37,7 +37,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(BlueprintReadOnly, Category = "State")
-	EFiringState FiringState = EFiringState::RELOADING;
+	EFiringState FiringState = EFiringState::AIMING;
 
 public:	
 	// Called every frame
@@ -46,10 +46,8 @@ public:
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
 private:
-	UPROPERTY()
 	UTankBarrel* Barrel = nullptr;
 
-	UPROPERTY()
 	UTankTurret* Turret = nullptr;
 
 	
