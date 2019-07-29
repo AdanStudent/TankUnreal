@@ -5,6 +5,7 @@
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 #include "TankBarrel.h"
 #include "TankTurret.h"
+#include "Projectile.h"
 
 
 // Sets default values for this component's properties
@@ -49,6 +50,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 		return;
 	}
 
+
 	FVector OutLaunchVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
 
@@ -63,6 +65,26 @@ void UTankAimingComponent::AimAt(FVector HitLocation)
 
 }
 
+void UTankAimingComponent::Fire()
+{
+
+	if (!ensure(Barrel) && ProjectileBlueprint)
+	{
+		return;
+	}
+
+	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
+
+	if (isReloaded)
+	{
+		//spawn projectile at barrel location
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation(FName("Projectile")), Barrel->GetSocketRotation(FName("Projectile")));
+
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastFireTime = FPlatformTime::Seconds();
+	}
+}
+
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
 
@@ -75,10 +97,8 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	auto AimAsRotator = AimDirection.Rotation();
 
 	auto DeltaRotator = AimAsRotator - BarrelRotation;
-	//UE_LOG(LogTemp, Warning, TEXT("AimAsRotater: %s"), *AimAsRotator.ToString())
 
 	Barrel->Elevate(DeltaRotator.Pitch);
-
 	Turret->RotateTurret(DeltaRotator.Yaw);
 
 }
