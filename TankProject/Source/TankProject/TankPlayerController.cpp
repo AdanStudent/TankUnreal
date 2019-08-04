@@ -27,7 +27,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 {
 	auto AimComp = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 
-	if (ensure(AimComp))
+	if (!ensure(AimComp))
 	{
 		return;
 	}
@@ -36,7 +36,6 @@ void ATankPlayerController::AimTowardsCrosshair()
 	bool bGotHitLocation = GetSightRayHitLocation(HitLocation);
 	if (bGotHitLocation)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Here"));
 
 		AimComp->AimAt(HitLocation);
 	}
