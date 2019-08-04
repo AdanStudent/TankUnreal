@@ -47,6 +47,8 @@ public:
 	void AimAt(FVector HitLocation);
 	
 	void MoveBarrelTowards(FVector AimDirection);
+	
+	bool IsBarrelMoving();
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
@@ -66,5 +68,7 @@ private:
 	UTankBarrel* Barrel = nullptr;
 
 	UTankTurret* Turret = nullptr;
+
+	FVector AimDirection;
 
 };
