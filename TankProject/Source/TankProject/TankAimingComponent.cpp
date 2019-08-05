@@ -25,6 +25,11 @@ void UTankAimingComponent::Initialize(UTankBarrel * BarrelToSet, UTankTurret * T
 
 }
 
+EFiringState UTankAimingComponent::GetFiringState() const
+{
+	return this->FiringState;
+}
+
 // Called when the game starts
 void UTankAimingComponent::BeginPlay()
 {
